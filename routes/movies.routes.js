@@ -1,5 +1,6 @@
 const async = require('hbs/lib/async');
 const Movie = require('../models/Movie.model');
+const Celebrity = require('../models/Celebrity.model');
 
 // starter code in both routes/celebrities.routes.js and routes/movies.routes.js
 const router = require('express').Router();
@@ -15,23 +16,23 @@ router.get('/create', async (req, res, next) => {
 });
 
 router.post('/create', async (req, res, next) => {
+    const { tilte, genre, plot, cast } = req.body;
     try {
-        const { tilte, genre, plot, cast } = req.body;
         await Movie.create({
             tilte,
             genre,
             plot, 
             cast
         });
-        res.redirect('movies/movies');
+        res.redirect('/movies');
     } catch (error) {
         next(error);
     }
 });
 
-router.get('/mobies', async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const allMovies = await Movies.find();
+        const allMovies = await Movie.find();
         res.render('movies/movies', { allMovies });
     } catch (error) {
         next(error);
