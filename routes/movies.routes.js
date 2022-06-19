@@ -21,7 +21,7 @@ router.post('/create', async (req, res, next) => {
         await Movie.create({ tilte, genre, plot, cast});
         res.redirect('/movies');
     } catch (error) {
-        res.redirect('/celebrities/new-movie');
+        res.redirect('movies/new-movie');
         next(error);
     }
 });

@@ -2,7 +2,7 @@
 
 <form  action="/movies/create" method="post">
 
-    <label>Tiltle</label>
+    <label>Title</label>
     <input name="title"/>
     <br>
     <label>Genre</label>
@@ -14,11 +14,11 @@
     <label>Cast</label>
     <select name="cast" multiple>
         {{#each celebrities}}
-            <option value="{{_id}}">{{name}}</option>
+            <option value="{{this._id}}">{{this.name}}</option>
         {{/each}}
     </select>
     <br>
 
-    <button type="submit">done</button>
+    <button type="submit">create Movie</button>
 
 </form>
