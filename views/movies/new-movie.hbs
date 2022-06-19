@@ -1,17 +1,24 @@
 <h2> New Movie</h2>
 
-<form method="post" action="/movies/create">
+<form  action="/movies/create" method="post">
 
     <label>Tiltle</label>
-    <input type="text" name="title" value="{{ title }}"/>
-
+    <input name="title"/>
+    <br>
     <label>Genre</label>
-    <input type="text" name="genre" value="{{ genre }}"/>
-
+    <input name="genre"/>
+    <br>
     <label>Plot</label>
-    <input type="text" name="plot" value="{{ plot }}"/>
-
+    <input name="plot"/>
+    <br>
     <label>Cast</label>
-    <input type="text" name="cast" value="{{ cats }}"/>
+    <select name="cast" multiple>
+        {{#each celebrities}}
+            <option value="{{_id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <br>
+
+    <button type="submit">done</button>
 
 </form>

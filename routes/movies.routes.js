@@ -18,14 +18,10 @@ router.get('/create', async (req, res, next) => {
 router.post('/create', async (req, res, next) => {
     const { tilte, genre, plot, cast } = req.body;
     try {
-        await Movie.create({
-            tilte,
-            genre,
-            plot, 
-            cast
-        });
+        await Movie.create({ tilte, genre, plot, cast});
         res.redirect('/movies');
     } catch (error) {
+        res.redirect('/celebrities/new-movie');
         next(error);
     }
 });

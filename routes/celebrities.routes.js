@@ -12,11 +12,7 @@ router.get('/create', (req, res, next) => {
 router.post('/create', async (req, res, next) => {
     try {
         const { name, ocupation, catchPhrase } = req.body;
-        await Celebrity.create({
-            name,
-            ocupation,
-            catchPhrase,
-        });
+        await Celebrity.create({ name, ocupation, catchPhrase});
         res.redirect('/celebrities');
     } catch (error) {
         res.redirect('/celebrities/new-celebrity');
@@ -26,7 +22,7 @@ router.post('/create', async (req, res, next) => {
 
 router.get('/', async (req, res, next) => {
     try {
-        const allCelebrities = await Celebrity.find();
+        const allCelebrities = await Celebrity.find({});
         res.render('celebrities/celebrities', {allCelebrities});
     } catch (error) {
         next(error);
