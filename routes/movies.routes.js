@@ -6,9 +6,18 @@ const Celebrity = require('../models/Celebrity.model');
 const router = require('express').Router();
 
 // all your routes here
+router.get('/', async (req, res, next) => {
+    try {
+        const allMovies = await Movie.find({});
+        res.render('movies/movies', { allMovies });
+    } catch (error) {
+        next(error);
+    }
+});
+
 router.get('/create', async (req, res, next) => {
     try {
-        const allCelebrities = await Celebrity.find();
+        const allCelebrities = await Celebrity.find({});
         res.render('movies/new-movie', { allCelebrities });
     } catch (error) {
         next(error);
@@ -16,23 +25,14 @@ router.get('/create', async (req, res, next) => {
 });
 
 router.post('/create', async (req, res, next) => {
-    const { tilte, genre, plot, cast } = req.body;
+    const { title, genre, plot, cast } = req.body;
     try {
-        await Movie.create({ tilte, genre, plot, cast});
+        await Movie.create({ title, genre, plot, cast});
         res.redirect('/movies');
     } catch (error) {
         res.redirect('movies/new-movie');
         next(error);
     }
 });
-
-router.get('/', async (req, res, next) => {
-    try {
-        const allMovies = await Movie.find();
-        res.render('movies/movies', { allMovies });
-    } catch (error) {
-        next(error);
-    }
-})
 
 module.exports = router;
